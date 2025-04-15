@@ -3143,14 +3143,16 @@ framework.modules.signals.connection(run_service["RenderStepped"], function(dt)
             local avg_ping = math.floor(ping:GetValue());
             local display_game = "v2";
             if LPH_OBFUSCATED then 
-              watermark:update_text(string.format(
-                'sustainability |PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | <font color="%s">Public</font>', accent, avg_ping, accent, avg_fps, accent, display_game
-              ));
-          else 
-              watermark:update_text(string.format(
-                'sustainability |PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | <font color="%s">Developer</font>', accent, avg_ping, accent, avg_fps, accent, display_game
-            ));
-          end;
+                watermark:update_text(string.format(
+                    'sustainability | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | <font color="%s">Public</font>', 
+                    accent, avg_ping, accent, avg_fps, accent, display_game
+                ));
+            else 
+                watermark:update_text(string.format(
+                    'sustainability | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | <font color="%s">Developer</font>', 
+                    accent, avg_ping, accent, avg_fps, accent, display_game
+                ));
+            end;
         end;
     end;
 
