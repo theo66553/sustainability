@@ -32,7 +32,7 @@ local color3_rgb = Color3.fromRGB;
 local services = framework["services"];
 local run_service = cloneref(services["RunService"]);
 local players = cloneref(services["players"]);
-local uis = cloneref(services["userInputService"]);
+local uis = cloneref(services["InputService"]);
 local tween_service = cloneref(services["tweenService"]);
 local camera = cloneref(services.Workspace["CurrentCamera"]);
 local lighting = cloneref(services["lighting"]);
@@ -42,37 +42,37 @@ local fps = stats.Workspace["Heartbeat"];
 local ping = stats.Network.ServerStatsItem["Data Ping"];
 local viewport_size = camera["ViewportSize"];
 local lplr = players["LocalPlayer"];
-local user = lplr["Name"];
+local  = lplr["Name"];
 local get_mouse = lplr:GetMouse();
 -- modules
 Instance_manager = framework.modules.instance_manager
 signals = framework.modules.signals
 -- fonts
-local create_font = loadstring(game:HttpGet("https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/fonts.lua"))();
+local create_font = loadstring(game:HttpGet("https://raw.githubcontent.com/judghementday2/bypass/refs/heads/main/fonts.lua"))();
 local fonts = {
     smallest_pixel = create_font:register("sustainability/MENU/FONTS", {
         name = "smallest pixel",
         weight = "regular",
         style = "normal",
-        link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/smallest_pixel-7.ttf",
+        link = "https://raw.githubcontent.com/judghementday2/bypass/refs/heads/main/smallest_pixel-7.ttf",
     }),
     templeos = create_font:register("sustainability/MENU/FONTS", {
         name = "templeos",
         weight = "regular",
         style = "normal",
-        link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/Templeos.ttf",
+        link = "https://raw.githubcontent.com/judghementday2/bypass/refs/heads/main/Templeos.ttf",
     }),
     proggytiny = create_font:register("sustainability/MENU/FONTS", {
         name = "proggytiny",
         weight = "regular",
         style = "normal",
-        link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/ProggyTiny.ttf",
+        link = "https://raw.githubcontent.com/judghementday2/bypass/refs/heads/main/ProggyTiny.ttf",
     }),
     medodica = create_font:register("sustainability/MENU/FONTS", {
         name = "medodica",
         weight = "regular",
         style = "normal",
-        link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/MedodicaRegular.ttf",
+        link = "https://raw.githubcontent.com/judghementday2/bypass/refs/heads/main/MedodicaRegular.ttf",
     }),
 };
 --
@@ -150,8 +150,8 @@ local UI = ({
         [Enum.KeyCode.RightControl] = "R-CTRL", [Enum.KeyCode.LeftAlt] = "L-ALT", [Enum.KeyCode.RightAlt] = "R-ALT",
         [Enum.KeyCode.Insert] = "INSERT", [Enum.KeyCode.End] = "END", [Enum.KeyCode.PageUp] = "PGUP",
         [Enum.KeyCode.Delete] = "DELETE", [Enum.KeyCode.Home] = "HOME", [Enum.KeyCode.PageDown] = "PGDN",
-        [Enum.UserInputType.MouseButton1] = "MB1", [Enum.UserInputType.MouseButton2] = "MB2",
-        [Enum.UserInputType.MouseButton3] = "MB3",
+        [Enum.InputType.MouseButton1] = "MB1", [Enum.InputType.MouseButton2] = "MB2",
+        [Enum.InputType.MouseButton3] = "MB3",
     },
 
     un_named_flags = 0,
@@ -161,8 +161,8 @@ local UI = ({
     flags = {},
 
     language = "English",
-    user_data = {
-        username = (user or "User"),
+    _data = {
+        name = ( or ""),
         uid = 1
     },
     shared = {
@@ -796,49 +796,49 @@ do -- menu
         set(default, defaultalpha)
 
         Sat.InputBegan:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if input.InputType == Enum.InputType.MouseButton1 then
                 slidingsaturation = true
                 update()
             end
         end)
 
         Sat.InputEnded:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if input.InputType == Enum.InputType.MouseButton1 then
                 slidingsaturation = false
                 update()
             end
         end)
 
         Hue.InputBegan:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if input.InputType == Enum.InputType.MouseButton1 then
                 slidinghue = true
                 update()
             end
         end)
 
         Hue.InputEnded:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if input.InputType == Enum.InputType.MouseButton1 then
                 slidinghue = false
                 update()
             end
         end)
 
         Alpha.InputBegan:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if input.InputType == Enum.InputType.MouseButton1 then
                 slidingalpha = true
                 update()
             end
         end)
 
         Alpha.InputEnded:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if input.InputType == Enum.InputType.MouseButton1 then
                 slidingalpha = false
                 update()
             end
         end)
 
         signals.connection(uis.InputChanged, function(input)
-            if input.UserInputType == Enum.UserInputType.MouseMovement then
+            if input.InputType == Enum.InputType.MouseMovement then
                 if slidingalpha then
                     update()
                 end
@@ -860,7 +860,7 @@ do -- menu
         end
 
         signals.connection(uis.InputBegan, function(Input)
-            if ColorWindow.Visible and Input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if ColorWindow.Visible and Input.InputType == Enum.InputType.MouseButton1 then
                 if not UI:IsMouseOverFrame(ColorWindow) and not UI:IsMouseOverFrame(Icon) and not UI:IsMouseOverFrame(parent) then
                     ColorWindow.Visible = false
                     parent.ZIndex = 1
@@ -986,19 +986,19 @@ do -- menu
             --
             do -- dragging
                 signals.connection(background.InputBegan, function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if input.InputType == Enum.InputType.MouseButton1 then
                         window.dragging[1], window.dragging[2] = true, uis:GetMouseLocation();
                     end
                 end);
 
                 signals.connection(uis.InputEnded, function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if input.InputType == Enum.InputType.MouseButton1 then
                         window.dragging[1] = false;
                     end
                 end);
 
                 signals.connection(uis.InputChanged, function(input)
-                    if window.dragging[1] and input.UserInputType == Enum.UserInputType.MouseMovement then
+                    if window.dragging[1] and input.InputType == Enum.InputType.MouseMovement then
                         local mouse_pos = uis:GetMouseLocation()
 
                         local x_pos = math.clamp(background.Position.X.Offset + (mouse_pos.X - window.dragging[2].X), -viewport_size.X / 2 + background.AbsoluteSize.X / 2, viewport_size.X / 2 - background.AbsoluteSize.X / 2);
@@ -1699,18 +1699,18 @@ do -- menu
         --
         for _, obj in pairs({Inline, Accent}) do
             signals.connection(obj.InputBegan, function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                if input.InputType == Enum.InputType.MouseButton1 then
                     Sliding = true;
                     is_sliding(input);
                 end
             end)
             signals.connection(obj.InputEnded, function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 then Sliding = false end;
+                if input.InputType == Enum.InputType.MouseButton1 then Sliding = false end;
             end)
         end
         --
         signals.connection(uis.InputChanged, function(input)
-            if input.UserInputType == Enum.UserInputType.MouseMovement and Sliding then
+            if input.InputType == Enum.InputType.MouseMovement and Sliding then
                 is_sliding(input);
             end
         end)
@@ -1993,7 +1993,7 @@ do -- menu
             NewList.ZIndex = ContentOutline.Visible and 5 or 1
         end)
         signals.connection(uis.InputBegan, function(Input)
-            if ContentOutline.Visible and Input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if ContentOutline.Visible and Input.InputType == Enum.InputType.MouseButton1 then
                 if not UI:IsMouseOverFrame(ContentOutline) and not UI:IsMouseOverFrame(Inline) then
                     ContentOutline.Visible = false
                     NewList.ZIndex = 1
@@ -2825,8 +2825,8 @@ do -- menu
                 end
                 if tostring(newkey):find("Enum.KeyCode.") then
                     newkey = Enum.KeyCode[tostring(newkey):gsub("Enum.KeyCode.", "")]
-                elseif tostring(newkey):find("Enum.UserInputType.") then
-                    newkey = Enum.UserInputType[tostring(newkey):gsub("Enum.UserInputType.", "")]
+                elseif tostring(newkey):find("Enum.InputType.") then
+                    newkey = Enum.InputType[tostring(newkey):gsub("Enum.InputType.", "")]
                 end
                 if newkey == Enum.KeyCode.Backspace then
                     Key = nil
@@ -2900,7 +2900,7 @@ do -- menu
                 Value.Text = "..."
 
                 Keybind.Binding = signals.connection(uis.InputBegan, function(input, gpe)
-                    set( input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode or input.UserInputType )
+                    set( input.InputType == Enum.InputType.Keyboard and input.KeyCode or input.InputType )
                     Keybind.Binding:Disconnect()
                     task.wait()
                     Keybind.Binding = nil
@@ -2909,7 +2909,7 @@ do -- menu
         end)
         --
         signals.connection(uis.InputBegan, function(inp)
-            if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding and not Keybind.UseKey then
+            if (inp.KeyCode == Key or inp.InputType == Key) and not Keybind.Binding and not Keybind.UseKey then
                 if Keybind.Mode == "Hold" then
                     if Keybind.Flag then
                         UI.flags[Keybind.Flag] = true
@@ -2938,7 +2938,7 @@ do -- menu
         signals.connection(uis.InputEnded, function(inp)
             if Keybind.Mode == "Hold" and not Keybind.UseKey then
                 if Key ~= "" or Key ~= nil then
-                    if inp.KeyCode == Key or inp.UserInputType == Key then
+                    if inp.KeyCode == Key or inp.InputType == Key then
                         if c then
                             c:Disconnect()
                             if Keybind.Flag then
@@ -2989,7 +2989,7 @@ do -- menu
         end)
         --
         signals.connection(uis.InputBegan, function(Input)
-            if ModeBox.Visible and Input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if ModeBox.Visible and Input.InputType == Enum.InputType.MouseButton1 then
                 local pos, size, mouse = ModeBox.AbsolutePosition, ModeBox.AbsoluteSize, get_mouse
                 if not (mouse.X >= pos.X and mouse.X <= pos.X + size.X and mouse.Y >= pos.Y and mouse.Y <= pos.Y + size.Y) then
                     ModeBox.Visible = false
@@ -3141,9 +3141,12 @@ framework.modules.signals.connection(run_service["RenderStepped"], function(dt)
             local accent = string.format("#%02X%02X%02X", accent_color.R * 255, accent_color.G * 255, accent_color.B * 255);
             local avg_fps = fps:GetValue();
             local avg_ping = math.floor(ping:GetValue());
-            local display_game = "v2";
+            local display_game = "V1";
+            local user_type = (LPH_OBFUSCATED and "Public") or "Developer";  -- Set the user type here
+    
             watermark:update_text(string.format(
-                'sustainability.wtf | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font>', accent, avg_ping, accent, avg_fps, accent, display_game
+                'sustainability | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">%s</font>', 
+                accent, avg_ping, accent, avg_fps, accent, display_game, accent, user_type
             ));
         end;
     end;
