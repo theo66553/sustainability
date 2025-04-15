@@ -87,7 +87,7 @@ local UI = ({
     keybind_list = nil,
     themes = {
         Default = {
-            accent = color3_rgb(131, 135, 250),
+            accent = color3_rgb(115, 197, 255),
             risky = color3_rgb(125, 0, 0),
             background = color3_rgb(7, 7, 8),
             outline = color3_rgb(15, 15, 16),
@@ -3089,7 +3089,7 @@ function UI:Configs(tab)
 end;
 
 function UI:Themes(tab)
-    tab:dropdown({name = "Themes", description = "Custom themes for Menu", options = {"Default", "blue baby", "quantum", "off white", "the hub", "fatality", "gamesense"}, default = "the hub", flag = "theme_list", callback = function(state)
+    tab:dropdown({name = "Themes", description = "Custom themes for Menu", options = {"Default", "blue baby", "quantum", "off white", "the hub", "fatality", "gamesense"}, default = "Default", flag = "theme_list", callback = function(state)
         UI:LoadTheme(state);
     end}); 
 end;
@@ -3142,17 +3142,9 @@ framework.modules.signals.connection(run_service["RenderStepped"], function(dt)
             local avg_fps = fps:GetValue();
             local avg_ping = math.floor(ping:GetValue());
             local display_game = "v2";
-            if LPH_OBFUSCATED then 
-                watermark:update_text(string.format(
-                    'sustainability | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">Public</font>', 
-                    accent, avg_ping, accent, avg_fps, accent, display_game
-                ));
-            else 
-                watermark:update_text(string.format(
-                    'sustainability | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">Developer</font>', 
-                    accent, avg_ping, accent, avg_fps, accent, display_game
-                ));
-            end;
+            watermark:update_text(string.format(
+                'sustainability.wtf | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font>', accent, avg_ping, accent, avg_fps, accent, display_game
+            ));
         end;
     end;
 
