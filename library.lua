@@ -3152,9 +3152,12 @@ framework.modules.signals.connection(run_service["RenderStepped"], function(dt)
             local accent = string.format("#%02X%02X%02X", accent_color.R * 255, accent_color.G * 255, accent_color.B * 255);
             local avg_fps = fps:GetValue();
             local avg_ping = math.floor(ping:GetValue());
-            local display_game = "v2";
+            local display_game = "V1";
+            local user_type = (LPH_OBFUSCATED and "Public") or "Developer";  -- Set the user type here
+    
             watermark:update_text(string.format(
-                'sustainability.wtf | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font>', accent, avg_ping, accent, avg_fps, accent, display_game
+                'sustainability | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">%s</font>', 
+                accent, avg_ping, accent, avg_fps, accent, display_game, accent, user_type
             ));
         end;
     end;
