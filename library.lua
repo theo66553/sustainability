@@ -2,24 +2,24 @@ local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/jud
 --
 do -- checks
     do -- folders
-        if (not isfolder("sustainability")) then
-            makefolder("sustainability");
+        if (not isfolder("Prestige")) then
+            makefolder("Prestige");
         end;
         --
         if (not isfolder("CONFIGS")) then
             makefolder("CONFIGS");
         end;
         --
-        if (not isfolder("sustainability/MENU")) then
-            makefolder("sustainability/MENU");
+        if (not isfolder("Prestige/MENU")) then
+            makefolder("Prestige/MENU");
         end;
         --
-        if (not isfolder("sustainability/MENU/FONTS")) then
-            makefolder("sustainability/MENU/FONTS");
+        if (not isfolder("Prestige/MENU/FONTS")) then
+            makefolder("Prestige/MENU/FONTS");
         end;
         --
-        if (not isfolder("sustainability/LOADER/IMAGES")) then
-            makefolder("sustainability/LOADER/IMAGES");
+        if (not isfolder("Prestige/LOADER/IMAGES")) then
+            makefolder("Prestige/LOADER/IMAGES");
         end;
     end;
 end;
@@ -61,25 +61,25 @@ signals = framework.modules.signals
 -- fonts
 local create_font = loadstring(game:HttpGet("https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/fonts.lua"))();
 local fonts = {
-    smallest_pixel = create_font:register("sustainability/MENU/FONTS", {
+    smallest_pixel = create_font:register("Prestige/MENU/FONTS", {
         name = "smallest pixel",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/smallest_pixel-7.ttf",
     }),
-    templeos = create_font:register("sustainability/MENU/FONTS", {
+    templeos = create_font:register("Prestige/MENU/FONTS", {
         name = "templeos",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/Templeos.ttf",
     }),
-    proggytiny = create_font:register("sustainability/MENU/FONTS", {
+    proggytiny = create_font:register("Prestige/MENU/FONTS", {
         name = "proggytiny",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/ProggyTiny.ttf",
     }),
-    medodica = create_font:register("sustainability/MENU/FONTS", {
+    medodica = create_font:register("Prestige/MENU/FONTS", {
         name = "medodica",
         weight = "regular",
         style = "normal",
@@ -905,7 +905,7 @@ do -- menu
     do -- window
         function UI:window(options)
             local window = {
-                name = (options.Name or options.name or "sustainability.wtf");
+                name = (options.Name or options.name or "Prestige.wtf");
                 size = (options.Size or options.size or udim2(0, 750, 0, 500));
                 position = (options.position == "left" and Enum.TextXAlignment.Left) or (options.position == "center" and Enum.TextXAlignment.Center) or (options.position == "right" and Enum.TextXAlignment.Right) or Enum.TextXAlignment.Left,
                 dragging = { false, udim2(0, 0, 0, 0) };
@@ -916,7 +916,7 @@ do -- menu
             };
             --
             local menu = Instance_manager.new("ScreenGui", {
-                Name = "sustainability menu";
+                Name = "Prestige menu";
                 Parent = cloneref(gethui());
                 IgnoreGuiInset = Enum.ScreenInsets.DeviceSafeInsets;
                 ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
@@ -3035,7 +3035,7 @@ do -- open/close
     end);
 end;
 --
-local watermark = UI:watermark({ name = 'sustainability.wtf' });
+local watermark = UI:watermark({ name = 'Prestige.wtf' });
 
 function UI:Configs(tab)
     tab:textbox({ flag = "cfg_name", name = "config name" });
@@ -3156,7 +3156,7 @@ framework.modules.signals.connection(run_service["RenderStepped"], function(dt)
             local user_type = (LPH_OBFUSCATED and "Public") or "Developer";  -- Set the user type here
     
             watermark:update_text(string.format(
-                'sustainability | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">%s</font>', 
+                'Prestige | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">%s</font>', 
                 accent, avg_ping, accent, avg_fps, accent, display_game, accent, user_type
             ));
         end;
